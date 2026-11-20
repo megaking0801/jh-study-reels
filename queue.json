@@ -1,4 +1,18 @@
 [
- {"date": "2026-11-21", "title": "影子測高", "video_url": "https://megaking0801.github.io/jh-study-reels/videos/01_shadow.mp4", "caption": "用影子算樹高，你的比例式可能整個寫反了！\n高對高、影對影，段考必考。\n留言「影子」並追蹤，我私訊你這支的重點整理。\n#國中數學 #國三數學 #相似形 #段考 #會考", "status": "pending"},
- {"date": "2026-11-22", "title": "面積比", "video_url": "https://megaking0801.github.io/jh-study-reels/videos/02_area.mp4", "caption": "邊長 2 倍，面積是幾倍？不是 2 倍！\n面積比 = 邊長比的平方，段考超愛考。\n留言「面積」並追蹤，我私訊你這支的重點整理。\n#國中數學 #國三數學 #相似形 #面積比 #段考 #會考", "status": "pending"}
+ {
+  "date": "2026-11-21",
+  "title": "影子測高",
+  "video_url": "https://megaking0801.github.io/jh-study-reels/videos/01_shadow.mp4",
+  "caption": "用影子算樹高，你的比例式可能整個寫反了！\n高對高、影對影，段考必考。\n留言「影子」並追蹤，我私訊你這支的重點整理。\n#國中數學 #國三數學 #相似形 #段考 #會考",
+  "status": "pending",
+  "time": "18:00"
+ },
+ {
+  "date": "2026-11-22",
+  "title": "面積比",
+  "video_url": "https://megaking0801.github.io/jh-study-reels/videos/02_area.mp4",
+  "caption": "邊長 2 倍，面積是幾倍？不是 2 倍！\n面積比 = 邊長比的平方，段考超愛考。\n留言「面積」並追蹤，我私訊你這支的重點整理。\n#國中數學 #國三數學 #相似形 #面積比 #段考 #會考",
+  "status": "pending",
+  "time": "21:00"
+ }
 ]

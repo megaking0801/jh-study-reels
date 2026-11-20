@@ -11,6 +11,8 @@ TOKEN_FILE = os.environ.get("IG_TOKEN_FILE", os.path.join(HERE, "ig_token.txt"))
 QUEUE = os.environ.get("IG_QUEUE", os.path.join(HERE, "queue.json"))
 IG_USER_ID = os.environ.get("IG_USER_ID", "17841466093914816")
 DRY = "--dry" in sys.argv
+CHECK = "--check" in sys.argv
+TZ = datetime.timezone(datetime.timedelta(hours=8))  # 台灣時間
 
 def call(method, path, token, **params):
     params["access_token"] = token
@@ -29,9 +31,14 @@ def refresh_token(token):
 
 def main():
     token = open(TOKEN_FILE).read().strip()
+    if CHECK:
+        r = call("GET", IG_USER_ID, token, fields="username,media_count")
+        print("token OK:", r); return
     q = json.load(open(QUEUE))
-    today = datetime.date.today().isoformat()
-    item = next((x for x in q if x["status"] == "pending" and x["date"] <= today), None)
+    now = datetime.datetime.now(TZ).replace(tzinfo=None)
+    def due(x):  # date + time(台灣時間，預設 18:00) 已到
+        return now >= datetime.datetime.fromisoformat(x["date"] + "T" + x.get("time", "18:00"))
+    item = next((x for x in q if x["status"] == "pending" and due(x)), None)
     if not item: print("今天沒有到期的影片"); return
     print("準備發：", item["title"], item["video_url"])
     if DRY: return

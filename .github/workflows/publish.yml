@@ -2,26 +2,47 @@ name: publish-reel
 on:
   schedule:
     - cron: "0 4,10,13 * * *"   # 台灣 12:00 / 18:00 / 21:00，影片依 queue.json 的 time 決定誰發
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "normal＝照排程發；check＝只驗證 IG/YT 授權；yt-test＝YT 不公開測試上傳"
+        default: check
+        type: choice
+        options: [check, yt-test, normal]
 concurrency: publish
 permissions:
   contents: write
 jobs:
   publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
+    env:
+      MODE: ${{ github.event.inputs.mode || 'normal' }}
+      IG_TOKEN: ${{ secrets.IG_TOKEN }}
+      YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+      YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+      YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      - name: Publish today's reel
-        env:
-          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+      - run: pip install -q google-api-python-client google-auth
+      - name: Instagram
+        if: env.MODE != 'yt-test'
+        continue-on-error: true
         run: |
           printf '%s' "$IG_TOKEN" > ig_token.txt
           python3 publish_reel.py --check
-          python3 publish_reel.py
+          if [ "$MODE" = normal ]; then python3 publish_reel.py; fi
           rm -f ig_token.txt
-      - name: Save queue status
+      - name: YouTube
+        if: env.YT_REFRESH_TOKEN != ''
+        continue-on-error: true
         run: |
+          if [ "$MODE" = yt-test ]; then python3 yt_upload.py --test
+          else python3 yt_upload.py --check; if [ "$MODE" = normal ]; then python3 yt_upload.py; fi; fi
+      - name: Save queue status
+        if: always()
+        run: |
+          rm -f ig_token.txt
           git config user.name "reel-bot"
           git config user.email "reel-bot@users.noreply.github.com"
           git add queue.json

@@ -5,7 +5,6 @@ on:
     # 同一時段跑兩次當保險，publish_reel.py 只會發「時間已到且還沒發」的那一支
     - cron: "7 4,10,13 * * *"
     - cron: "37 4,10,13 * * *"
-    - cron: "32 13 * * *"   # 臨時測試，確認排程有沒有觸發
   workflow_dispatch:
     inputs:
       mode:

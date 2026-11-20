@@ -1,0 +1,27 @@
+name: publish-reel
+on:
+  schedule:
+    - cron: "0 12 * * *"   # 每天 20:00 台灣時間
+  workflow_dispatch: {}
+concurrency: publish
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish today's reel
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: |
+          printf '%s' "$IG_TOKEN" > ig_token.txt
+          python3 publish_reel.py
+          rm -f ig_token.txt
+      - name: Save queue status
+        run: |
+          git config user.name "reel-bot"
+          git config user.email "reel-bot@users.noreply.github.com"
+          git add queue.json
+          git diff --cached --quiet || (git commit -m "mark posted" && git push)

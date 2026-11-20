@@ -33,7 +33,12 @@ def main():
     token = open(TOKEN_FILE).read().strip()
     if CHECK:
         r = call("GET", IG_USER_ID, token, fields="username,media_count")
-        print("token OK:", r); return
+        print("token OK:", r)
+        try:
+            p = call("GET", "me/permissions", token)
+            print("permissions:", [x.get("permission") for x in p.get("data", []) if x.get("status") == "granted"])
+        except SystemExit as e: print("permissions lookup failed:", e)
+        return
     q = json.load(open(QUEUE))
     now = datetime.datetime.now(TZ).replace(tzinfo=None)
     def due(x):  # date + time(台灣時間，預設 18:00) 已到

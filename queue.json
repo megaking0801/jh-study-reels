@@ -62,5 +62,28 @@
    "會考數學",
    "段考"
   ]
+ },
+ {
+  "date": "2026-11-21",
+  "time": "18:00",
+  "title": "三角形相似判定",
+  "video_url": "https://megaking0801.github.io/jh-study-reels/videos/04_triangle.mp4",
+  "caption": "證明兩個三角形相似，只要記三招：AA、SAS、SSS。\n小心 SAS 的角要夾在兩邊中間！\n留言「判定」並追蹤，我私訊你這支的重點整理。\n#國中數學 #國三數學 #相似三角形 #相似形 #段考 #會考",
+  "status": "pending",
+  "video_file": "videos/04_triangle.mp4",
+  "yt_status": "pending",
+  "yt_title": "國三數學｜三角形相似判定 AA、SAS、SSS 一次記",
+  "yt_description": "證明兩個三角形相似，只要記三招：\nAA：兩個角相等\nSAS：兩邊成比例，而且夾角相等\nSSS：三邊都成比例\n小心：SAS 的角一定要夾在兩邊中間。\n國三上 相似形（1-3 相似三角形的判定），段考、會考必考。\n\n想要這支的「重點整理卡」？到 IG @jh.study.tw 留言「判定」並追蹤，私訊給你。\n\n#國中數學 #會考 #相似三角形 #段考 #Shorts",
+  "yt_tags": [
+   "國中數學",
+   "國三數學",
+   "相似形",
+   "相似三角形",
+   "AA相似",
+   "SAS相似",
+   "SSS相似",
+   "會考數學",
+   "段考"
+  ]
  }
 ]

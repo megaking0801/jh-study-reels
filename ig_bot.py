@@ -28,7 +28,7 @@ def call(method, path, **params):
 
 def main():
     st = json.load(open(STATE)) if os.path.exists(STATE) else {"done": []}
-    done = set(st["done"])
+    done = set(st["done"]); fails = st.get("fails", {})
     media = call("GET", f"{IG}/media", fields="id,caption,timestamp", limit="15")
     if "error" in media: print("media error:", media["error"]); return
     print("recent media:", len(media.get("data", [])), "| keywords:", list(RECAPS))
@@ -46,10 +46,12 @@ def main():
             if DRY: continue
             r = call("POST", f"{IG}/messages", recipient={"comment_id": c["id"]}, message={"text": RECAPS[kw]})
             print(" ->", str(r)[:200])
-            if "error" not in r: sent += 1
-            done.add(c["id"])  # 失敗也記，避免每 10 分鐘重複打；錯誤看 log
+            if "error" not in r: sent += 1; done.add(c["id"])
+            else:  # 失敗最多重試 6 次（約 1 小時），之後放棄，避免無限重打
+                fails[c["id"]] = fails.get(c["id"], 0) + 1
+                if fails[c["id"]] >= 6: done.add(c["id"])
     if not (DRY or CHECK):
-        json.dump({"done": sorted(done)[-2000:]}, open(STATE, "w"))
+        json.dump({"done": sorted(done)[-2000:], "fails": {k: v for k, v in fails.items() if k not in done}}, open(STATE, "w"))
     print("sent:", sent)
 
 if __name__ == "__main__": main()

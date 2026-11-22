@@ -24,7 +24,8 @@ for m in media.get("data", []):
     if "error" in r:
         for k in METRICS:   # 有的指標不支援就逐個試
             one = get(f"{m['id']}/insights", metric=k)
-            if "error" in one: row[k] = None
+            if "error" in one:
+                row[k] = None; row.setdefault("errors", {})[k] = one["error"][:200]
             else: row[k] = one["data"][0]["values"][0]["value"] if one.get("data") else None
     else:
         for d in r.get("data", []): row[d["name"]] = d["values"][0]["value"]
@@ -33,5 +34,6 @@ acct = get(f"{UID}", fields="followers_count,follows_count,media_count")
 out = {"fetched_at": datetime.datetime.utcnow().isoformat() + "Z", "account": acct, "media": rows}
 json.dump(out, open(os.path.join(HERE, "insights.json"), "w"), ensure_ascii=False, indent=1)
 print("account:", acct)
+for x in rows[:1]: print("sample errors:", json.dumps(x.get("errors"), ensure_ascii=False)[:900])
 for x in rows:
     print(x["time"][:16], x["title"], {k: x.get(k) for k in METRICS})

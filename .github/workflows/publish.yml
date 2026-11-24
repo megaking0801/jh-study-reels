@@ -11,7 +11,7 @@ on:
         description: "normal＝照排程發；check＝只驗證 IG/YT 授權；yt-test＝YT 不公開測試上傳"
         default: check
         type: choice
-        options: [check, yt-test, normal, insights]
+        options: [check, yt-test, normal, insights, yt-long]
 concurrency: publish
 permissions:
   contents: write
@@ -29,7 +29,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: pip install -q google-api-python-client google-auth
       - name: Instagram
-        if: env.MODE != 'yt-test'
+        if: env.MODE != 'yt-test' && env.MODE != 'yt-long'
         continue-on-error: true
         run: |
           printf '%s' "$IG_TOKEN" > ig_token.txt
@@ -39,9 +39,12 @@ jobs:
           rm -f ig_token.txt
       - name: YouTube
         if: env.YT_REFRESH_TOKEN != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
         continue-on-error: true
         run: |
-          if [ "$MODE" = yt-test ]; then python3 yt_upload.py --test
+          if [ "$MODE" = yt-long ]; then gh release download longform-1 -D longform --clobber && python3 yt_long.py
+          elif [ "$MODE" = yt-test ]; then python3 yt_upload.py --test
           else python3 yt_upload.py --check; if [ "$MODE" = normal ]; then python3 yt_upload.py; fi; fi
       - name: Save queue status
         if: always()

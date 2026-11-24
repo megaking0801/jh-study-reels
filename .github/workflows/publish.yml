@@ -41,9 +41,10 @@ jobs:
         if: env.YT_REFRESH_TOKEN != ''
         env:
           GH_TOKEN: ${{ github.token }}
+          LONG_PRIVACY: public
         continue-on-error: true
         run: |
-          if [ "$MODE" = yt-long ]; then git fetch -q origin longform-assets && git checkout FETCH_HEAD -- longform/full_v1.mp4 longform/thumb_A.png && python3 yt_long.py
+          if [ "$MODE" = yt-long ]; then git fetch -q origin longform-assets && git checkout FETCH_HEAD -- longform && python3 yt_long.py
           elif [ "$MODE" = yt-test ]; then python3 yt_upload.py --test
           else python3 yt_upload.py --check; if [ "$MODE" = normal ]; then python3 yt_upload.py; fi; fi
       - name: Save queue status

@@ -1,0 +1,29 @@
+name: insights-daily
+on:
+  schedule:
+    - cron: "13 16 * * *"   # 台灣 00:13，每天一次；避開整點
+  workflow_dispatch:
+concurrency: publish
+permissions:
+  contents: write
+jobs:
+  insights:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      IG_TOKEN: ${{ secrets.IG_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch IG insights
+        run: |
+          printf '%s' "$IG_TOKEN" > ig_token.txt
+          python3 insights.py
+          rm -f ig_token.txt
+      - name: Save snapshot
+        if: always()
+        run: |
+          rm -f ig_token.txt
+          git config user.name "reel-bot"
+          git config user.email "reel-bot@users.noreply.github.com"
+          git add insights.json insights_history.csv 2>/dev/null || true
+          git diff --cached --quiet || (git commit -m "daily insights snapshot" && git pull -q --rebase origin main && git push)

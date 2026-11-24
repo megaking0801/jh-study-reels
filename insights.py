@@ -37,3 +37,15 @@ print("account:", acct)
 for x in rows[:1]: print("sample errors:", json.dumps(x.get("errors"), ensure_ascii=False)[:900])
 for x in rows:
     print(x["time"][:16], x["title"], {k: x.get(k) for k in METRICS})
+
+# ---- 每日快照：附加到 insights_history.csv（日期、帳號追蹤數、每支的指標），用來看 24h／72h 的成長 ----
+import csv
+hist = os.path.join(HERE, "insights_history.csv")
+new = not os.path.exists(hist)
+with open(hist, "a", newline="", encoding="utf-8") as f:
+    w = csv.writer(f)
+    if new: w.writerow(["fetched_at", "followers", "media_id", "posted_at", "title", "views", "reach", "likes", "comments", "shares", "saved", "avg_watch_ms"])
+    for x in rows:
+        w.writerow([out["fetched_at"], (acct or {}).get("followers_count"), x["id"], x["time"], x["title"], x.get("views"), x.get("reach"), x.get("likes"),
+                    x.get("comments"), x.get("shares"), x.get("saved"), x.get("ig_reels_avg_watch_time")])
+print("history rows appended:", len(rows))

@@ -376,9 +376,9 @@
   "title": "不能隨便約x",
   "video_url": "https://megaking0801.github.io/jh-study-reels/videos/14_cancel_x.mp4",
   "caption": "方程式兩邊都有 x，直接約掉？你弄丟了一個解！\nx(x+1)=x(2x−1)：移項、提出 x，答案是 x=0 或 2。\n追蹤我，每天看更多國中重點整理。\n#國中數學 #國二數學 #一元二次方程式 #段考 #會考",
-  "status": "pending",
+  "status": "posted",
   "video_file": "videos/14_cancel_x.mp4",
-  "yt_status": "pending",
+  "yt_status": "posted",
   "yt_title": "國二數學｜兩邊都有 x 別直接約掉（會漏一個解）",
   "yt_description": "兩邊都有 x，直接約掉會少一個解。\nx(x+1)=x(2x−1) 約掉 x 只得 x=2；正確是移項提出 x：x(2−x)=0，所以 x=0 或 2。\n約掉 x 以前，先想 x 會不會是 0。\n國二上 一元二次方程式，段考必考。\n\n每天更新國中數理重點整理，IG 追蹤 @jh.study.tw。\n\n#國中數學 #一元二次方程式 #會考 #段考 #Shorts",
   "yt_tags": [
@@ -389,7 +389,11 @@
    "段考",
    "會考數學",
    "Shorts"
-  ]
+  ],
+  "media_id": "18353045977250214",
+  "posted_at": "2026-11-25T13:12:47",
+  "yt_id": "U65d-PCWjIc",
+  "yt_posted_at": "2026-11-25T21:12:50+08:00"
  },
  {
   "date": "2026-11-26",

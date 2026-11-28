@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-11-28T00:02:56+00:00",
+ "fetched_at": "2026-11-28T15:24:41+00:00",
  "range": [
   "2026-10-31",
   "2026-11-28"
@@ -7,10 +7,10 @@
  "videos": [
   {
    "video": "VCPNK2dHDfY",
-   "views": 1431,
-   "estimatedMinutesWatched": 214,
+   "views": 1426,
+   "estimatedMinutesWatched": 213,
    "averageViewDuration": 18,
-   "averageViewPercentage": 85.42,
+   "averageViewPercentage": 85.51,
    "likes": 9,
    "comments": 0,
    "shares": 3,
@@ -20,10 +20,10 @@
   },
   {
    "video": "dhrQqAQOrD8",
-   "views": 1393,
+   "views": 1390,
    "estimatedMinutesWatched": 226,
    "averageViewDuration": 21,
-   "averageViewPercentage": 87.68,
+   "averageViewPercentage": 87.63,
    "likes": 12,
    "comments": 0,
    "shares": 1,
@@ -33,10 +33,10 @@
   },
   {
    "video": "BBKm9HGyWG4",
-   "views": 1182,
-   "estimatedMinutesWatched": 164,
+   "views": 1181,
+   "estimatedMinutesWatched": 163,
    "averageViewDuration": 17,
-   "averageViewPercentage": 71.08,
+   "averageViewPercentage": 70.98,
    "likes": 8,
    "comments": 0,
    "shares": 3,
@@ -62,7 +62,7 @@
    "views": 1131,
    "estimatedMinutesWatched": 199,
    "averageViewDuration": 25,
-   "averageViewPercentage": 104.22,
+   "averageViewPercentage": 104.38000000000001,
    "likes": 7,
    "comments": 0,
    "shares": 1,
@@ -72,7 +72,7 @@
   },
   {
    "video": "aVXhd4EwuWQ",
-   "views": 1036,
+   "views": 1032,
    "estimatedMinutesWatched": 147,
    "averageViewDuration": 16,
    "averageViewPercentage": 83.08,
@@ -98,10 +98,10 @@
   },
   {
    "video": "OsSpFw6bj9o",
-   "views": 973,
+   "views": 971,
    "estimatedMinutesWatched": 179,
-   "averageViewDuration": 29,
-   "averageViewPercentage": 176.05,
+   "averageViewDuration": 30,
+   "averageViewPercentage": 176.53,
    "likes": 8,
    "comments": 0,
    "shares": 1,
